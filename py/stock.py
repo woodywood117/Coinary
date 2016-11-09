@@ -3,32 +3,38 @@
 import csv
 import httplib
 
-def gather(url, date):
+class stockStruct(object):
 
-        # Generate the connection to server
-    conn = httplib.HTTPConnection(url)
+    def __init__(self):
+        self.currentData = None
+        self.dataCounter = 0
 
-        # Make request for specified date
-    conn.request("GET", "/stock_"+date)
+    def gather(self, url, date):
 
-        # Read the response from the socket
-    resp = conn.getresponse()
+            # Generate the connection to server
+        conn = httplib.HTTPConnection(url)
 
-        # Check that we got a response
-    if resp.status != 200:
-            # If we didn't, return error code
-        return resp.status
+            # Make request for specified date
+        conn.request("GET", "/stock_"+date)
 
-        # Process the request
-    output = resp.read()
+            # Read the response from the socket
+        resp = conn.getresponse()
 
-        # Close the connection
-    conn.close()
+            # Check that we got a response
+        if resp.status != 200:
+                # If we didn't, return error code
+            return resp.status
 
-        # Return the output
-    return output
+            # Process the request
+        output = resp.read()
+
+            # Close the connection
+        conn.close()
+
+            # Set the output
+        self.currentData = output
 
 
-def nextVal():
+    def nextVal(self):
 
 

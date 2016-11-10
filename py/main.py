@@ -1,19 +1,32 @@
 #!/usr/bin python
 
+from optparse import OptionParser
 import learning
 import stock
 import twitter
 
-url = "notSureYet.com"
+# Set all of the commandline flag options
+parser = OptionParser()
+parser.add_option("-u", "--url", help="URL to pull data from", metavar="URL")
+parser.add_option("-h", "--handle", help="Twitter handle to use", metavar="HAN")
+parser.add_option("-s", "--symbol", help="Stock symbol to use", metavar="SYM")
+parser.add_option("-d", "--date", help="Start date", metavar="DATE")
+(options, args) = parser.parse_args()
 
-def getNextTimeDat(date):
+# Assign variables / Check for bad input
+url = options.URL
+if not url:
+    url = "https://zebulonmorgan.com"
+if not date:
+    date = "11.07.2016"
+if (not options.SYM) or (not options.HAN):
+    exit(1)
 
-        # Get the Twitter data
-    tdat = twitter.gather(url, date)
 
-        # Check for errors
+# Generate the primary data structures
+tw = twitter.twitterStruct(url, "11.07.2016", tHandle)
+st = stock.stockStruct(url, "11.07.2016", sSymbol)
+# ln = learning.tracker()
 
-        # Get the stock data
-    sdat = stock.gather(url, date)
-
-        # Check for errors
+print tw.nextTweet()
+print st.nextVal()

@@ -16,25 +16,25 @@ public class Main {
   private static String[] lastStockResponseArray = new String[37];
 
   // Stores list of Twitter handles that are being scrapped
-  private static String[] handleArray = {"3m", "amazon", "apple", "att", 
-      "bankofamerica", "boeing", "chevron", "cisco", "citi", "comcast", 
-      "cocacola", "disney", "exxonmobil", "facebook", "ford", "generalelectric", 
+  private static String[] handleArray = {"3m", "amazon", "apple", "att",
+      "bankofamerica", "boeing", "chevron", "cisco", "citi", "comcast",
+      "cocacola", "disney", "exxonmobil", "facebook", "ford", "generalelectric",
       "google", "ibm", "intel", "mastercard", "mcdonalds", "microsoft",
       "netflix", "nvidia", "oracle", "pepsico", "qualcomm", "sprint",
-      "tmobile", "teslamotors", "unionpacific", "verizon", "visa", 
+      "tmobile", "teslamotors", "unionpacific", "verizon", "visa",
       "walgreens", "walmart", "wellsfargo", "yahoo"
   };
-  
+
   // Stores list of stock symbols that are being scrapped
-  private static String[] tickerArray = {"MMM", "AMZN", "AAPL", "T", "BAC", 
-      "BA", "CVX", "CSCO", "C", "CMCSA", "KO", "DIS", "XOM", "FB", "F", "GE", 
-      "GOOGL", "IBM", "INTC", "MA", "MCD", "MSFT", "NFLX", "NVDA", "ORCL", 
+  private static String[] tickerArray = {"MMM", "AMZN", "AAPL", "T", "BAC",
+      "BA", "CVX", "CSCO", "C", "CMCSA", "KO", "DIS", "XOM", "FB", "F", "GE",
+      "GOOGL", "IBM", "INTC", "MA", "MCD", "MSFT", "NFLX", "NVDA", "ORCL",
       "PEP", "QCOM", "S", "TMUS", "TSLA", "UNP", "VZ", "V", "WBA",
       "WMT", "WFC", "YHOO"
   };
 
   public static void main(String[] args) {
-  
+
     // Sets last Twitter ID for all handles to 0
     for (int j = 0; j < lastIDArray.length; j++) {
       lastIDArray[j] = "0";
@@ -43,7 +43,7 @@ public class Main {
     for (int k = 0; k < lastStockResponseArray.length; k++) {
       lastStockResponseArray[k] = "";
     }
-  
+
     LetsEncryptCertInstaller.run(); // Installs SSL certificate for HTTPS
     // Runs main logic loop in its own thread
     Thread mainLogicThread = new Thread() {
@@ -56,7 +56,7 @@ public class Main {
               // Add to CSV with data for stock symbol
               runYahooFinance(i, tickerArray[i]);
               System.out.printf("Tweets for @%s retreived.\n", handleArray[i]);
-              System.out.printf("Stock prices for %s retreived.\n", 
+              System.out.printf("Stock prices for %s retreived.\n",
                 tickerArray[i]);
               // Wait 5 seconds before continuing to next company
               Thread.sleep(5000);
@@ -76,7 +76,7 @@ public class Main {
     Thread coinaryPHPThread = new Thread() {
       public void run() {
         try {
-          URL serverCoinaryURL = new URL(serverURL + "coinary.php");
+          URL serverCoinaryURL = new URL(serverURL + "tweets.php");
           URLConnection serverCoinaryConnection = serverCoinaryURL
             .openConnection(); // Creates HTTPS connection to server
           // Tells connection we're going to POST to server
@@ -116,7 +116,7 @@ public class Main {
   // Runs PHP file to store data from Yahoo Finance on web server
   public static void runCoinaryTickerPHP(int i, String ticker, String data) {
     try {
-      URL serverCoinaryStocksURL = new URL(serverURL + "coinaryStocks.php");
+      URL serverCoinaryStocksURL = new URL(serverURL + "stocks.php");
       URLConnection serverCoinaryStocksConnection = serverCoinaryStocksURL
         .openConnection(); // Creates HTTPS connection to server
       // Tells connection we're going to POST to server
@@ -147,7 +147,7 @@ public class Main {
       public void run() {
         try {
           String stockFormat = "s=" + ticker + "\\&f=l1d1t1c1ohgv";
-          URL yahooStocks = new URL("http://finance.yahoo.com/d/quotes.csv?" + 
+          URL yahooStocks = new URL("http://finance.yahoo.com/d/quotes.csv?" +
             stockFormat);
           // Creates connection to Yahoo Finance
           URLConnection yahooConnection = yahooStocks.openConnection();
@@ -164,7 +164,7 @@ public class Main {
               .lastIndexOf(',');
             if (!(data.substring(0, lastIndexOfCommaInResponse))
               .equals(lastStockResponseArray[i]
-              .substring(0, lastIndexOfCommaInResponse))) 
+              .substring(0, lastIndexOfCommaInResponse)))
             { // If data minus trades has changed, add to CSV
               runCoinaryTickerPHP(i, ticker, data);
             }

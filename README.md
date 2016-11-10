@@ -1,5 +1,5 @@
 # Coinary
-Predicts stock prices and coorelates keywords from tweets to stock price variation
+Predicts stock prices and correlates keywords from tweets to stock price variation
 
 ---
 
@@ -11,7 +11,13 @@ the authentication for twitter and fetching data. The Java portion of the progra
 is used handle the scheduling of data fetching.
 
 ### Fetching
---Put info on fetching data here--
+The Java portion of the program stores the traded companies that data is
+collected for and calls each of the PHP files, one responsible for
+retrieving tweets from Twitter and another for pulling live stock market data
+from Yahoo Finance.
+
+Both PHP files run on a web server and save their respective data into separate
+CSV files for each company and each day.
 
 ### Processing
 Processing the data primarily involves figuring out how to dynamically alter the different weighting

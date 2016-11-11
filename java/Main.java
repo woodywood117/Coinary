@@ -44,7 +44,6 @@ public class Main {
       lastStockResponseArray[k] = "";
     }
 
-    LetsEncryptCertInstaller.run(); // Installs SSL certificate for HTTPS
     // Runs main logic loop in its own thread
     Thread mainLogicThread = new Thread() {
       public void run() {

@@ -13,8 +13,8 @@ is used handle the scheduling of data fetching.
 ### Fetching
 The Java portion of the program stores the traded companies that data is
 collected for and calls each of the PHP files, one responsible for
-retrieving tweets from Twitter and another for pulling live stock market data
-from Yahoo Finance.
+retrieving tweets from Twitter and another for storing live stock market data
+from Yahoo Finance that is retrieved through the Java portion.
 
 Both PHP files run on a web server and save their respective data into separate
 CSV files for each company and each day.

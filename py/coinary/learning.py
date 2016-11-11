@@ -2,6 +2,7 @@
 
 import math
 
-def process():
+class tracker(object):
 
-
+    def __init__(self):
+        self.store = {}

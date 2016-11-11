@@ -1,32 +1,28 @@
 #!/usr/bin python
 
-from optparse import OptionParser
+from argparse import ArgumentParser
 import learning
 import stock
 import twitter
 
 # Set all of the commandline flag options
-parser = OptionParser()
-parser.add_option("-u", "--url", help="URL to pull data from", metavar="URL")
-parser.add_option("-h", "--handle", help="Twitter handle to use", metavar="HAN")
-parser.add_option("-s", "--symbol", help="Stock symbol to use", metavar="SYM")
-parser.add_option("-d", "--date", help="Start date", metavar="DATE")
-(options, args) = parser.parse_args()
-
-# Assign variables / Check for bad input
-url = options.URL
-if not url:
-    url = "https://zebulonmorgan.com"
-if not date:
-    date = "11.07.2016"
-if (not options.SYM) or (not options.HAN):
-    exit(1)
-
+parser = ArgumentParser()
+parser.add_argument("-u", "--url", help="URL to pull data from", default="https://zebulonmorgan.com")
+parser.add_argument("--handle", help="Twitter handle to use")
+parser.add_argument("-s", "--symbol",required=True, help="Stock symbol to use")
+parser.add_argument("-d", "--date", required=True, help="Start date", default="10.11.2016")
+args = parser.parse_args()
 
 # Generate the primary data structures
-tw = twitter.twitterStruct(url, "11.07.2016", tHandle)
-st = stock.stockStruct(url, "11.07.2016", sSymbol)
+tw = twitter.twitterStruct(args.handle, args.url, args.date)
+st = stock.stockStruct(args.symbol, args.url, args.date)
 # ln = learning.tracker()
 
-print tw.nextTweet()
-print st.nextVal()
+print(tw.nextTweet())
+print(st.nextVal())
+print(tw.nextTweet())
+print(st.nextVal())
+print(tw.nextTweet())
+print(st.nextVal())
+print(tw.nextTweet())
+print(st.nextVal())

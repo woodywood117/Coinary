@@ -1,11 +1,11 @@
 #!/usr/bin python
 
 import csv
-import httplib
+import requests
 
 class twitterStruct(object):
 
-    def __init__(self, url= "test.com", date= "1.1.1970", handle):
+    def __init__(self, handle, url, date):
         self.currentData = None
         self.dataCounter = 0
         self.url = url
@@ -13,23 +13,14 @@ class twitterStruct(object):
         self.handle = handle
 
 
-    def gather(self, url, date):
-            # Generate the connection to server
-        conn = httplib.HTTPConnection(url)
-            # Make request for specified date
-        conn.request("GET", "/twitter-"+self.handle+"-"+date+".csv")
-            # Read the response from the socket
-        resp = conn.getresponse()
-            # Check that we got a response
-        if resp.status != 200:
-                # If we didn't, return error code
-            return resp.status
-            # Process the request
-        output = resp.read()
-            # Close the connection
-        conn.close()
-            # Convert data to CSV format
-        cv = csv.reader(output.splitlines(), delimiter=',')
+    def gather(self):
+            # Download the next file
+        req = requests.get(self.url+"/twitter-"+self.handle+"-"+self.date+".csv")
+        if req.status_code != 200:
+            print("File download error.")
+            exit(1)
+           # Convert data to CSV format
+        cv = csv.reader(req.text.splitlines(), delimiter=',')
             # Convert CSV to list format
         cvl = list(cv)
             # Set the output
@@ -39,7 +30,7 @@ class twitterStruct(object):
     def nextTweet(self):
             # Asserts that you don't try to access data that there.
         if not self.currentData or self.dataCounter >= len(self.currentData):
-            self.gather(self.url, self.date)
+            self.gather()
             self.dataCounter = 0
         ret = self.currentData[self.dataCounter]
         self.dataCounter = self.dataCounter + 1

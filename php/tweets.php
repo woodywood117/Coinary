@@ -28,7 +28,7 @@
 
   $content = $connection->get("search/tweets", $query);
 
-  $csv_filename = "twitter-".$_POST["handle"]."-".date("d.m.Y").".csv";
+  $csv_filename = $_SERVER['DOCUMENT_ROOT']."/tweets/".$_POST["handle"]."-".date("d.m.Y").".csv";
   $file = fopen($csv_filename, "a");
 
   $index = count($content->statuses);

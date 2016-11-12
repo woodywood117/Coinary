@@ -7,7 +7,7 @@
     exit(1);
   }
 
-  $csv_filename = "stocks-".$_POST["ticker"]."-".date("d.m.Y").".csv";
+  $csv_filename = $_SERVER['DOCUMENT_ROOT']."/stocks/".$_POST["ticker"]."-".date("d.m.Y").".csv";
   $file = fopen($csv_filename, "a");
 
   $fileContents .= $_POST["data"]."\n";

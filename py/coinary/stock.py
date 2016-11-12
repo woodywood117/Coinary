@@ -15,7 +15,7 @@ class stockStruct(object):
 
     def gather(self):
             # Download the next file
-        req = requests.get(self.url+"/stocks-"+self.symbol+"-"+self.date+".csv")
+        req = requests.get(self.url+"/stocks/"+self.symbol+"-"+self.date+".csv")
         if req.status_code != 200:
             print("File download error.")
             exit(1)

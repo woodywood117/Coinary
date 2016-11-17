@@ -16,21 +16,16 @@ public class Main {
   private static String[] lastStockResponseArray = new String[37];
 
   // Stores list of Twitter handles that are being scrapped
-  private static String[] handleArray = {"3m", "amazon", "apple", "att",
-      "bankofamerica", "boeing", "chevron", "cisco", "citi", "comcast",
-      "cocacola", "disney", "exxonmobil", "facebook", "ford", "generalelectric",
-      "google", "ibm", "intel", "mastercard", "mcdonalds", "microsoft",
-      "netflix", "nvidia", "oracle", "pepsico", "qualcomm", "sprint",
-      "tmobile", "teslamotors", "unionpacific", "verizon", "visa",
-      "walgreens", "walmart", "wellsfargo", "yahoo"
+  private static String[] handleArray = {"amazon", "apple", "att", 
+      "cocacola", "disney", "facebook", "ford", "google", "ibm", "intel",
+      "mcdonalds", "microsoft", "netflix", "nvidia", "sprint", "tmobile",
+      "verizon", "walmart", "wellsfargo", "yahoo"
   };
 
   // Stores list of stock symbols that are being scrapped
-  private static String[] tickerArray = {"MMM", "AMZN", "AAPL", "T", "BAC",
-      "BA", "CVX", "CSCO", "C", "CMCSA", "KO", "DIS", "XOM", "FB", "F", "GE",
-      "GOOGL", "IBM", "INTC", "MA", "MCD", "MSFT", "NFLX", "NVDA", "ORCL",
-      "PEP", "QCOM", "S", "TMUS", "TSLA", "UNP", "VZ", "V", "WBA",
-      "WMT", "WFC", "YHOO"
+  private static String[] tickerArray = {"AMZN", "AAPL", "T", "KO", "DIS",
+      "FB", "F", "GOOGL", "IBM", "INTC", "MCD", "MSFT", "NFLX", "NVDA",
+      "S", "TMUS", "VZ", "WMT", "WFC", "YHOO"
   };
 
   public static void main(String[] args) {

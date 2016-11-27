@@ -34,7 +34,7 @@ class twitterStruct(object):
 
     def nextTweet(self):
             # Asserts that you don't try to access data that there.
-        if not self.currentData or self.dataCounter >= len(self.currentData):
+        if not self.currentData or self.dataCounter >= len(self.currentData)-1:
             self.gather()
             self.dataCounter = 0
         ret = self.currentData[self.dataCounter]

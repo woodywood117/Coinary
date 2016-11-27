@@ -20,10 +20,14 @@ class stockStruct(object):
         req = requests.get(self.url+"/stocks/"+self.symbol+"-"+self.Date.strftime("%d.%m.%Y")+".csv")
         d = datetime.timedelta(days=1)
         self.Date = self.Date + d
+            # Enforce that the next request doesn't ask for a weekend
+        while self.Date.weekday() > 4:
+            self.Date = self.Date + d
         if req.status_code != 200:
             print(req.status_code)
             print("Stock file download error.\n"+self.url+"/stocks/"+self.symbol+"-"+(self.Date - d).strftime("%d.%m.%Y")+".csv")
-            exit(1)
+            self.gather()
+            return
             # Convert data to CSV format
         cv = csv.reader(req.text.splitlines(), delimiter=',')
             # Convert CSV to list format

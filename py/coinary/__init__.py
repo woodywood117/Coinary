@@ -9,7 +9,7 @@ from collections import OrderedDict
 
 # Set all of the commandline flag options
 parser = ArgumentParser()
-parser.add_argument("-u", "--url", help="URL to pull data from", default="https://zebulonmorgan.com")
+parser.add_argument("-u", "--url", help="URL to pull data from", default="https://example.com")
 parser.add_argument("--handle", help="Twitter handle to use")
 parser.add_argument("-s", "--symbol",required=True, help="Stock symbol to use")
 parser.add_argument("-d", "--date", help="Start date", default="18.11.2016")
@@ -70,7 +70,7 @@ while st.Date < endDate:
 endList = []
 for word in ln.store.keys():
     endList.append((word, (sum(ln.store[word]) / float(len(ln.store[word])))))
-    # print(word + ": ", (sum(ln.store[word]) / float(len(ln.store[word])))) 
+    # print(word + ": ", (sum(ln.store[word]) / float(len(ln.store[word]))))
 
 endList = sorted(endList, key=lambda word: word[1])
 print("The lowest 10 values are: ", endList[0:10])
